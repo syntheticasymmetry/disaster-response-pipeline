@@ -24,27 +24,27 @@ Finally, a **Flask web app** is built to enable users to classify new messages.
     - Open `http://localhost:5000/` in your browser.
 
 ## File structure
-    - app<br>
-    | - template<br>
-    | |- master.html  # main page of web app<br>
-    | |- go.html  # classification result page of web app<br>
+    - app
+    | - template
+    | |- master.html  # main page of web app
+    | |- go.html  # classification result page of web app
     |- run.py  # Flask file that runs app (allows user to input new messages and view the classification results)
 
-    - data<br>
-    |- categories.csv  # data to process<br>
-    |- messages.csv  # data to process<br>
-    |- process_data.py<br>
+    - data
+    |- categories.csv  # data to process
+    |- messages.csv  # data to process
+    |- process_data.py
     |- DisasterResponce.db   # database to save clean data to
 
-    - jupyter<br>
-    |- ETL Pipeline Preparation.ipynb # cleans and processes message data, storing the cleaned dataset in an SQLite databaset<br>
+    - jupyter
+    |- ETL Pipeline Preparation.ipynb # cleans and processes message data, storing the cleaned dataset in an SQLite databaset
     |- ML Pipeline Preparation.ipynb # trains a multi-output classifier on the desaster message data, saving the trained model as classifier.pkl
 
-    - models<br>
-    |- train_classifier.py<br>
+    - models
+    |- train_classifier.py
     |- classifier.pkl  # saved model 
 
     - README.md
 
-    - requirements.txt # list of Python dependencies<br>
+    - requirements.txt # list of Python dependencies
     |- To install the necessary dependencies, run: pip install -r requirements.txt
