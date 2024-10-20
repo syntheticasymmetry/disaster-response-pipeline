@@ -1,8 +1,8 @@
 # Disaster Response Pipeline Project
 
 ## Project Overview
-In this project we build a machine learning pipeline to categorize disaster messages. These messages are classified into multiple categories to ensure that the appropriate disaster relief agencies receive them.
-The project includes an **ETL pipeline** to clean and store the data and an **ML pipeline** to train and evaluate the model.
+In this project we build a machine learning pipeline to categorize disaster messages. These messages are classified into multiple categories to ensure that the appropriate disaster relief agencies receive them.<br>
+The project includes an **ETL pipeline** to clean and store the data and an **ML pipeline** to train and evaluate the model.<br>
 Finally, a **Flask web app** is built to enable users to classify new messages.
 
 ## Instructions:
@@ -24,29 +24,27 @@ Finally, a **Flask web app** is built to enable users to classify new messages.
     - Open `http://localhost:5000/` in your browser.
 
 ## File structure
-disaster-responce-pipeline/
+    - app<br>
+    | - template<br>
+    | |- master.html  # main page of web app<br>
+    | |- go.html  # classification result page of web app<br>
+    |- run.py  # Flask file that runs app (allows user to input new messages and view the classification results)
 
-- app/
-| - template/
-| |- master.html  # main page of web app
-| |- go.html  # classification result page of web app
-|- run.py  # Flask file that runs app (allows user to input new messages and view the classification results)
+    - data<br>
+    |- categories.csv  # data to process<br>
+    |- messages.csv  # data to process<br>
+    |- process_data.py<br>
+    |- DisasterResponce.db   # database to save clean data to
 
-- data/
-|- categories.csv  # data to process 
-|- messages.csv  # data to process
-|- process_data.py
-|- DisasterResponce.db   # database to save clean data to
+    - jupyter<br>
+    |- ETL Pipeline Preparation.ipynb # cleans and processes message data, storing the cleaned dataset in an SQLite databaset<br>
+    |- ML Pipeline Preparation.ipynb # trains a multi-output classifier on the desaster message data, saving the trained model as classifier.pkl
 
-- jupyter/
-|- ETL Pipeline Preparation.ipynb # cleans and processes message data, storing the cleaned dataset in an SQLite databaset
-|- ML Pipeline Preparation.ipynb # trains a multi-output classifier on the desaster message data, saving the trained model as classifier.pkl
+    - models<br>
+    |- train_classifier.py<br>
+    |- classifier.pkl  # saved model 
 
-- models/
-|- train_classifier.py
-|- classifier.pkl  # saved model 
+    - README.md
 
-- README.md
-
-- requirements.txt # list of Python dependencies
-|- To install the necessary dependencies, run: pip install -r requirements.txt
+    - requirements.txt # list of Python dependencies<br>
+    |- To install the necessary dependencies, run: pip install -r requirements.txt
