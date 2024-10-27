@@ -50,4 +50,4 @@ Finally, a **Flask web app** is built to enable users to classify new messages.
 
 ## Dataset Imbalance
 The dataset is imbalanced. Some categories (like "water" or "electricity") have significatnly fewer examples than more common ones like "related " or "request". This imbalance biased the model leading to better performace on more frequent categories than the rarer ones. A high recall might be prioritized in critical categories in order to ensure essential cases are detected. However, this risks increasing false positives. On the other hand, focusing on precision reduces the false positives but risks to miss actual instances, expecially in urgent categories.<br>
-If I had more time, I'd adress the dataset imbalance to imorove model performance (like SMOTE) to generate synthetic samples for rare categories to help model better identify these essential cases.
+If I had more time, I'd adress the dataset imbalance to improve model performance (like SMOTE) to generate synthetic samples for rare categories to help model better identify these essential cases.
