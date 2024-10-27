@@ -34,11 +34,11 @@ Finally, a **Flask web app** is built to enable users to classify new messages.
     |- categories.csv  # data to process
     |- messages.csv  # data to process
     |- process_data.py
-    |- DisasterResponce.db   # database to save clean data to
+    |- DisasterResponce.db  # database to save clean data to
 
     - jupyter
-    |- ETL Pipeline Preparation.ipynb # cleans and processes message data, storing the cleaned dataset in an SQLite databaset
-    |- ML Pipeline Preparation.ipynb # trains a multi-output classifier on the desaster message data, saving the trained model as classifier.pkl
+    |- ETL Pipeline Preparation.ipynb  # cleans and processes message data, storing the cleaned dataset in an SQLite databaset
+    |- ML Pipeline Preparation.ipynb  # trains a multi-output classifier on the desaster message data, saving the trained model as classifier.pkl
 
     - models
     |- train_classifier.py
@@ -46,5 +46,8 @@ Finally, a **Flask web app** is built to enable users to classify new messages.
 
     - README.md
 
-    - requirements.txt # list of Python dependencies
-    |- To install the necessary dependencies, run: pip install -r requirements.txt
+    - requirements.txt  # list of Python dependencies, to install the necessary dependencies, run: pip install -r requirements.txt
+
+## Dataset Imbalance
+The dataset is imbalanced. Some categories (like "water" or "electricity") have significatnly fewer examples than more common ones like "related " or "request". This imbalance biased the model leading to better performace on more frequent categories than the rarer ones. A high recall might be prioritized in critical categories in order to ensure essential cases are detected. However, this risks increasing false positives. On the other hand, focusing on precision reduces the false positives but risks to miss actual instances, expecially in urgent categories.<br>
+If I had more time, I'd adress the dataset imbalance to imorove model performance (like SMOTE) to generate synthetic samples for rare categories to help model better identify these essential cases.
