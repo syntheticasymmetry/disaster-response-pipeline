@@ -7,7 +7,7 @@ from nltk.tokenize import word_tokenize
 from flask import Flask
 from flask import render_template, request, jsonify
 from plotly.graph_objs import Bar
-from sklearn.externals import joblib
+from joblib import load
 from sqlalchemy import create_engine
 
 
@@ -25,11 +25,11 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///../data/YourDatabaseName.db')
-df = pd.read_sql_table('YourTableName', engine)
+engine = create_engine('sqlite:///../data/DisasterResponse.db')
+df = pd.read_sql_table('Messages', engine)
 
 # load model
-model = joblib.load("../models/your_model_name.pkl")
+model = load("../models/classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -65,6 +65,53 @@ def index():
         }
     ]
     
+    # visualization 2: top 10 message categories
+    category_counts = df.iloc[:, 3:].sum().sort_values(ascending=False).head(10)
+    category_names = list(category_counts.index)
+
+    graphs.append(
+        {
+            'data': [
+                Bar(
+                    x=category_names,
+                    y=category_counts
+                )
+            ],
+            'layout': {
+                'title': 'Top 10 Message Categories',
+                'yaxis': {'title': 'Count'},
+                'xaxis': {'title': 'Category'}
+            }
+        }
+    )
+
+    # visualization 3: Messages per genre and top categories
+    top_categories_df = df[category_names + ['genre']].copy()
+    genre_category_counts = top_categories_df.groupby('genre').sum()
+
+    stacked_data = []
+    for category in category_names:
+        stacked_data.append(
+            {
+                'x': genre_category_counts.index,
+                'y': genre_category_counts[category],
+                'type': 'bar',
+                'name': category
+            }
+        )
+    
+    graphs.append(
+        {
+            'data': stacked_data,
+            'layout': {
+                'title': 'Messages per Genre and Top Categories',
+                'barmode': 'stack',
+                'yaxis': {'title': 'Message Count'},
+                'xaxis': {'title': 'Genre'}
+            }
+        }
+    )
+
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
