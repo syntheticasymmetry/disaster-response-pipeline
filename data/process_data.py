@@ -48,6 +48,12 @@ def clean_data(df):
     for column in categories:
         categories[column] = categories[column].astype(str).str[-1].astype(int)
     
+    # remove rows where 'related' is 2
+    categories = categories[categories['related'] !=2]
+
+    # filter 'df' based on the filtered categories indices to retain only rows with "related" equals to 0 or 1
+    df = df.loc[categories.index]
+
     # drop the original categories column from df
     df = df.drop('categories', axis=1)
 
